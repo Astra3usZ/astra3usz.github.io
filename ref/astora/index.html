@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Astora - Reference</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <style>
+      /* --- CSS VARIABLES --- */
+      :root {
+        --bg-color: #1a1a1a;
+        --card-bg: #2d2d2d;
+        --text-color: #f0f0f0;
+        --accent-color: #9b59b6;
+        /* SOLID background */
+        --nav-bg: #2d2d2d;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      }
+
+      body.light-mode {
+        --bg-color: #f9f9f9;
+        --card-bg: #ffffff;
+        --text-color: #333333;
+        --accent-color: #8e44ad;
+        /* SOLID background */
+        --nav-bg: #ffffff;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      /* --- NEW STACKED HEADER --- */
+      header {
+        background-color: var(--nav-bg);
+        padding: 0.8rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-sizing: border-box;
+      }
+
+      .header-left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+      }
+
+      .logo {
+        font-weight: 800;
+        font-size: 1.6rem;
+        color: var(--accent-color);
+        line-height: 1.1;
+        letter-spacing: 1px;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 15px;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav a {
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 0.85rem;
+        opacity: 0.7;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover,
+      nav a.active {
+        color: var(--accent-color);
+        opacity: 1;
+      }
+
+      #theme-toggle {
+        background: none;
+        border: 2px solid var(--text-color);
+        color: var(--text-color);
+        padding: 5px 15px;
+        cursor: pointer;
+        border-radius: 20px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+      #theme-toggle:hover {
+        background-color: var(--text-color);
+        color: var(--bg-color);
+      }
+
+      /* --- CONTENT --- */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+        flex: 1;
+        box-sizing: border-box;
+      }
+
+      .char-intro {
+        margin-bottom: 3rem;
+      }
+      .char-intro h1 {
+        font-size: 3.5rem;
+        margin: 0;
+        line-height: 1.1;
+      }
+      .char-intro .subtitle {
+        font-size: 1.5rem;
+        opacity: 0.8;
+        display: block;
+        margin-bottom: 1.5rem;
+        color: var(--accent-color);
+      }
+      .char-intro p {
+        font-size: 1.1rem;
+        max-width: 800px;
+        opacity: 0.9;
+      }
+
+      .split-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 4rem;
+        align-items: start;
+      }
+      .stats-card h3 {
+        margin-top: 0;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--accent-color);
+        display: inline-block;
+      }
+      .stats-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .stats-table td {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+      }
+      .stats-label {
+        font-weight: bold;
+        width: 30%;
+        color: var(--accent-color);
+      }
+
+      .profile-card {
+        text-align: center;
+      }
+      .profile-img {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+        border-radius: 25px;
+        box-shadow: var(--shadow);
+        object-fit: cover;
+      }
+      .img-credit {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        font-style: italic;
+      }
+
+      .ref-section {
+        margin-bottom: 4rem;
+        background-color: var(--card-bg);
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        text-align: center;
+      }
+      .ref-section h3 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: var(--accent-color);
+        font-size: 1.8rem;
+      }
+      .full-ref-image {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+        border-radius: 25px;
+        display: block;
+        margin: 0 auto 15px auto;
+      }
+      .download-btn {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 10px 30px;
+        border-radius: 30px;
+        font-weight: bold;
+        transition: transform 0.2s;
+      }
+      .download-btn:hover {
+        transform: scale(1.05);
+      }
+
+      .details-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+      .palette-container {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+      .color-swatch {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        cursor: pointer;
+        border: 2px solid var(--card-bg);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+      .notes-list li {
+        margin-bottom: 8px;
+        list-style: none;
+      }
+      .check {
+        color: #2ecc71;
+        margin-right: 10px;
+      }
+      .cross {
+        color: #e74c3c;
+        margin-right: 10px;
+      }
+
+      .extra-card {
+        background-color: var(--card-bg);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+      }
+      .extra-card h3 {
+        margin-top: 0;
+        color: var(--accent-color);
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        opacity: 0.7;
+        margin-top: auto;
+        border-top: 1px solid #444;
+        background-color: var(--nav-bg);
+      }
+      footer p {
+        margin: 10px 0;
+      }
+
+      @media (max-width: 900px) {
+        .split-layout,
+        .details-row {
+          grid-template-columns: 1fr;
+        }
+        .char-intro h1 {
+          font-size: 2.5rem;
+        }
+        .profile-img {
+          max-width: 100%;
+        }
+        .full-ref-image {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <div class="logo">ASTRA3USZ</div>
+        <nav>
+          <ul>
+            <li><a href="../../index.html#about">About</a></li>
+            <li><a href="../../index.html#events">Events</a></li>
+            <li><a href="../../index.html#socials">Socials</a></li>
+            <li><a href="../index.html" class="active">Reference</a></li>
+          </ul>
+        </nav>
+      </div>
+      <button id="theme-toggle">Light Mode</button>
+    </header>
+
+    <div class="container">
+      <div class="char-intro">
+        <h1>Astora</h1>
+        <span class="subtitle">The Starry Wanderer</span>
+        <p>
+          Astora is a wanderer from the stars who landed in Bangkok. He loves
+          spicy food, interaction design, and exploring city nightlife. Usually
+          seen wearing his signature jacket.
+        </p>
+      </div>
+
+      <div class="split-layout">
+        <div class="stats-card">
+          <h3>Character Bio</h3>
+          <table class="stats-table">
+            <tr>
+              <td class="stats-label">Species</td>
+              <td>Vulpes Galactica (Fox)</td>
+            </tr>
+            <tr>
+              <td class="stats-label">Origin</td>
+              <td>Planet Kamikoni</td>
+            </tr>
+            <tr>
+              <td class="stats-label">Gender</td>
+              <td>Male</td>
+            </tr>
+            <tr>
+              <td class="stats-label">Birthday</td>
+              <td>December 5th</td>
+            </tr>
+            <tr>
+              <td class="stats-label">Height</td>
+              <td>175 cm</td>
+            </tr>
+          </table>
+        </div>
+        <div class="profile-card">
+          <img src="profile.png" alt="Astora Profile" class="profile-img" />
+          <div class="img-credit">Art by Sosom</div>
+        </div>
+      </div>
+
+      <div class="ref-section">
+        <h3>Reference Sheet</h3>
+        <img src="ref.png" alt="Full Reference Sheet" class="full-ref-image" />
+        <div class="img-credit">Reference sheet by Leoneal</div>
+        <a href="ref.png" download class="download-btn">
+          <i class="fas fa-download"></i> Download Full Size
+        </a>
+      </div>
+
+      <div class="details-row">
+        <div>
+          <h3>Color Palette</h3>
+          <p style="font-size: 0.9rem; opacity: 0.7">Click to copy HEX</p>
+          <div class="palette-container">
+            <div
+              class="color-swatch"
+              style="background: #530b5d"
+              data-color="#530b5d"
+              onclick="copyColor(this)"
+            ></div>
+            <div
+              class="color-swatch"
+              style="background: #c272e3"
+              data-color="#c272e3"
+              onclick="copyColor(this)"
+            ></div>
+            <div
+              class="color-swatch"
+              style="background: #faf4fc"
+              data-color="#faf4fc"
+              onclick="copyColor(this)"
+            ></div>
+            <div
+              class="color-swatch"
+              style="background: #f9d631"
+              data-color="#f9d631"
+              onclick="copyColor(this)"
+            ></div>
+            <div
+              class="color-swatch"
+              style="background: #fc94ab"
+              data-color="#fc94ab"
+              onclick="copyColor(this)"
+            ></div>
+          </div>
+        </div>
+        <div>
+          <h3>Design Notes</h3>
+          <ul class="notes-list">
+            <li>
+              <i class="fas fa-check check"></i> He’s a fox with tiger-like
+              stripes!
+            </li>
+            <li>
+              <i class="fas fa-check check"></i> The astral ring is important.
+            </li>
+            <li>
+              <i class="fas fa-times cross"></i> His nose is pink, not black.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="extra-card">
+        <h3>The Story of Astora</h3>
+        <p>[draft] Chapter of the Past:</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>Character & Design © Astra3usZ</p>
+    </footer>
+
+    <script>
+      const toggleButton = document.getElementById("theme-toggle");
+      const body = document.body;
+      toggleButton.addEventListener("click", () => {
+        body.classList.toggle("light-mode");
+        if (body.classList.contains("light-mode")) {
+          toggleButton.textContent = "Dark Mode";
+        } else {
+          toggleButton.textContent = "Light Mode";
+        }
+      });
+      function copyColor(element) {
+        const hex = element.getAttribute("data-color");
+        navigator.clipboard.writeText(hex).then(() => {
+          alert("Copied " + hex + " to clipboard!");
+        });
+      }
+    </script>
+  </body>
+</html>
