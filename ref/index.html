@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Character References - Astra3usZ</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <style>
+      /* --- CSS VARIABLES --- */
+      :root {
+        --bg-color: #1a1a1a;
+        --card-bg: #2d2d2d;
+        --text-color: #f0f0f0;
+        --accent-color: #9b59b6;
+        /* SOLID background for these pages */
+        --nav-bg: #2d2d2d;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      }
+
+      body.light-mode {
+        --bg-color: #f9f9f9;
+        --card-bg: #ffffff;
+        --text-color: #333333;
+        --accent-color: #8e44ad;
+        /* SOLID background for these pages */
+        --nav-bg: #ffffff;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        line-height: 1.6;
+        height: 100vh;
+        overflow: hidden; /* Unscrollable Hub */
+        display: flex;
+        flex-direction: column;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      /* --- NEW STACKED HEADER --- */
+      header {
+        background-color: var(--nav-bg);
+        padding: 0.8rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-sizing: border-box;
+      }
+
+      .header-left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+      }
+
+      .logo {
+        font-weight: 800;
+        font-size: 1.6rem;
+        color: var(--accent-color); /* Kept accent color for sub-pages */
+        line-height: 1.1;
+        letter-spacing: 1px;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 15px;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav a {
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 0.85rem;
+        opacity: 0.7;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover,
+      nav a.active {
+        color: var(--accent-color);
+        opacity: 1;
+      }
+
+      #theme-toggle {
+        background: none;
+        border: 2px solid var(--text-color);
+        color: var(--text-color);
+        padding: 5px 15px;
+        cursor: pointer;
+        border-radius: 20px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+      #theme-toggle:hover {
+        background-color: var(--text-color);
+        color: var(--bg-color);
+      }
+
+      /* --- CONTENT --- */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 2rem;
+        text-align: center;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .page-title h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+      }
+      .page-title p {
+        font-size: 1.2rem;
+        opacity: 0.8;
+        margin-bottom: 3rem;
+      }
+
+      .char-row {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+
+      .char-card {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+        display: block;
+        width: 250px;
+        border: 2px solid transparent;
+      }
+      .char-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        border-color: var(--accent-color);
+      }
+
+      .char-avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+        border: 4px solid var(--accent-color);
+      }
+      .char-name {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--text-color);
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        text-align: center;
+        padding: 2rem; /* Consistent with main page */
+        font-size: 0.9rem;
+        opacity: 0.7;
+        border-top: 1px solid #444;
+        background-color: var(--nav-bg);
+      }
+      footer p {
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <div class="logo">ASTRA3USZ</div>
+        <nav>
+          <ul>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#events">Events</a></li>
+            <li><a href="../index.html#socials">Socials</a></li>
+            <li><a href="#" class="active">Reference</a></li>
+          </ul>
+        </nav>
+      </div>
+      <button id="theme-toggle">Light Mode</button>
+    </header>
+
+    <div class="container">
+      <div class="page-title">
+        <h1>Character Information</h1>
+        <p>Reference Sheets and Details</p>
+      </div>
+
+      <div class="char-row">
+        <a href="./astora/index.html" class="char-card">
+          <img src="astora.png" alt="Astora" class="char-avatar" />
+          <div class="char-name">Astora</div>
+        </a>
+        <a href="./zaki/index.html" class="char-card">
+          <img src="zaki.png" alt="Zaki" class="char-avatar" />
+          <div class="char-name">Zaki</div>
+        </a>
+        <a href="./beryl/index.html" class="char-card">
+          <img src="beryl.png" alt="Beryl" class="char-avatar" />
+          <div class="char-name">Beryl</div>
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <p>Logo Art by Leoneal & Pudding</p>
+      <p>© 2025 Astra3usZ</p>
+    </footer>
+
+    <script>
+      const toggleButton = document.getElementById("theme-toggle");
+      const body = document.body;
+      toggleButton.addEventListener("click", () => {
+        body.classList.toggle("light-mode");
+        if (body.classList.contains("light-mode")) {
+          toggleButton.textContent = "Dark Mode";
+        } else {
+          toggleButton.textContent = "Light Mode";
+        }
+      });
+    </script>
+  </body>
+</html>
