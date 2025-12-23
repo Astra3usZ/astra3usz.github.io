@@ -30,16 +30,32 @@
         --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
 
+      /* SAFETY: Force cutoff for any horizontal overflow */
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* --- GLOBAL STYLES --- */
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background-color: var(--bg-color);
         color: var(--text-color);
-        margin: 0;
-        padding: 0;
         transition: background-color 0.3s ease, color 0.3s ease;
         line-height: 1.6;
-        height: 100vh;
-        overflow: hidden; /* Keeps it unscrollable */
+
+        /* THE FIX: Use min-height instead of height */
+        min-height: 100vh;
+        /* Removed overflow: hidden so mobile can scroll */
+
         display: flex;
         flex-direction: column;
       }
@@ -53,12 +69,11 @@
         padding: 0;
       }
 
-      /* --- HEADER (New Grid Layout) --- */
+      /* --- HEADER (Grid Layout) --- */
       header {
         background-color: var(--nav-bg);
-        /* No blur needed for solid background */
         padding: 0.8rem 2rem;
-        position: sticky;
+        position: sticky; /* Sticky is fine here */
         top: 0;
         z-index: 1000;
         box-shadow: var(--shadow);
@@ -137,6 +152,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        width: 100%;
       }
 
       .page-title h1 {
@@ -202,7 +218,8 @@
         justify-content: center;
         align-items: center;
         gap: 5px;
-        margin-bottom: 0;
+        /* Ensure footer doesn't stick weirdly if page is short */
+        margin-top: auto;
       }
       footer p {
         margin: 0;
@@ -228,6 +245,11 @@
         }
         nav a {
           font-size: 0.75rem;
+        }
+
+        /* Ensure container has breathing room on mobile */
+        .container {
+          padding: 2rem 1rem;
         }
       }
     </style>
