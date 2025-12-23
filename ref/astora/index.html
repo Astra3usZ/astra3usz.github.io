@@ -16,7 +16,7 @@
         --card-bg: #2d2d2d;
         --text-color: #f0f0f0;
         --accent-color: #9b59b6;
-        /* SOLID background */
+        /* Solid Background */
         --nav-bg: #2d2d2d;
         --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
       }
@@ -26,7 +26,6 @@
         --card-bg: #ffffff;
         --text-color: #333333;
         --accent-color: #8e44ad;
-        /* SOLID background */
         --nav-bg: #ffffff;
         --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
@@ -53,33 +52,36 @@
         padding: 0;
       }
 
-      /* --- NEW STACKED HEADER --- */
+      /* --- HEADER (New Grid Layout) --- */
       header {
         background-color: var(--nav-bg);
         padding: 0.8rem 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: var(--shadow);
         position: sticky;
         top: 0;
         z-index: 1000;
+        box-shadow: var(--shadow);
         box-sizing: border-box;
-      }
 
-      .header-left {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2px;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas:
+          "logo spacer button"
+          "nav spacer button";
+        align-items: center;
+        row-gap: 2px;
       }
 
       .logo {
+        grid-area: logo;
         font-weight: 800;
         font-size: 1.6rem;
         color: var(--accent-color);
         line-height: 1.1;
         letter-spacing: 1px;
+      }
+
+      nav {
+        grid-area: nav;
       }
 
       nav ul {
@@ -106,14 +108,17 @@
       }
 
       #theme-toggle {
-        background: none;
+        grid-area: button;
+        background: transparent;
         border: 2px solid var(--text-color);
         color: var(--text-color);
-        padding: 5px 15px;
+        padding: 6px 18px;
         cursor: pointer;
         border-radius: 20px;
-        font-weight: bold;
+        font-weight: 700;
+        font-size: 0.85rem;
         transition: all 0.3s ease;
+        align-self: center;
       }
       #theme-toggle:hover {
         background-color: var(--text-color);
@@ -183,7 +188,7 @@
       }
       .profile-img {
         width: 100%;
-        max-width: 250px;
+        max-width: 275px;
         height: auto;
         border-radius: 25px;
         box-shadow: var(--shadow);
@@ -284,12 +289,9 @@
         opacity: 0.7;
         margin-top: auto;
         border-top: 1px solid #444;
-        background-color: var(--nav-bg);
-      }
-      footer p {
-        margin: 10px 0;
       }
 
+      /* --- MOBILE ADJUSTMENTS --- */
       @media (max-width: 900px) {
         .split-layout,
         .details-row {
@@ -304,23 +306,42 @@
         .full-ref-image {
           max-width: 100%;
         }
+
+        /* Header Grid Adjustment */
+        header {
+          padding: 0.8rem 1rem;
+          grid-template-columns: 1fr auto;
+          grid-template-areas:
+            "logo button"
+            "nav nav";
+          row-gap: 10px;
+        }
+
+        .logo {
+          font-size: 1.4rem;
+        }
+        nav ul {
+          justify-content: center;
+          gap: 12px;
+        }
+        nav a {
+          font-size: 0.75rem;
+        }
       }
     </style>
   </head>
   <body>
     <header>
-      <div class="header-left">
-        <div class="logo">ASTRA3USZ</div>
-        <nav>
-          <ul>
-            <li><a href="../../index.html#about">About</a></li>
-            <li><a href="../../index.html#events">Events</a></li>
-            <li><a href="../../index.html#socials">Socials</a></li>
-            <li><a href="../index.html" class="active">Reference</a></li>
-          </ul>
-        </nav>
-      </div>
+      <div class="logo">ASTRA3USZ</div>
       <button id="theme-toggle">Light Mode</button>
+      <nav>
+        <ul>
+          <li><a href="../../index.html#about">About</a></li>
+          <li><a href="../../index.html#events">Events</a></li>
+          <li><a href="../../index.html#socials">Socials</a></li>
+          <li><a href="../index.html" class="active">Reference</a></li>
+        </ul>
+      </nav>
     </header>
 
     <div class="container">
@@ -328,10 +349,9 @@
         <h1>Astora</h1>
         <span class="subtitle">The Starry Wanderer</span>
         <p>
-          Born with a destiny to sacrifice himself for the greater good, Astora
-          accepts and follows it, until the moment his fate comes to change.
-          Through rebirth, his destiny is rewritten, and he now steps onto a
-          path of his own making.
+          Astora is a wanderer from the stars who landed in Bangkok. He loves
+          spicy food, interaction design, and exploring city nightlife. Usually
+          seen wearing his signature jacket.
         </p>
       </div>
 
