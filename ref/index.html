@@ -16,7 +16,6 @@
         --card-bg: #2d2d2d;
         --text-color: #f0f0f0;
         --accent-color: #9b59b6;
-        /* SOLID background for these pages */
         --nav-bg: #2d2d2d;
         --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
       }
@@ -26,7 +25,6 @@
         --card-bg: #ffffff;
         --text-color: #333333;
         --accent-color: #8e44ad;
-        /* SOLID background for these pages */
         --nav-bg: #ffffff;
         --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
@@ -40,7 +38,7 @@
         transition: background-color 0.3s ease, color 0.3s ease;
         line-height: 1.6;
         height: 100vh;
-        overflow: hidden; /* Unscrollable Hub */
+        overflow: hidden; /* Keeps it unscrollable */
         display: flex;
         flex-direction: column;
       }
@@ -54,7 +52,7 @@
         padding: 0;
       }
 
-      /* --- NEW STACKED HEADER --- */
+      /* --- HEADER --- */
       header {
         background-color: var(--nav-bg);
         padding: 0.8rem 2rem;
@@ -78,7 +76,7 @@
       .logo {
         font-weight: 800;
         font-size: 1.6rem;
-        color: var(--accent-color); /* Kept accent color for sub-pages */
+        color: var(--accent-color);
         line-height: 1.1;
         letter-spacing: 1px;
       }
@@ -125,7 +123,7 @@
       .container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 2rem 2rem;
+        padding: 1rem 2rem;
         text-align: center;
         flex: 1;
         display: flex;
@@ -141,26 +139,26 @@
       .page-title p {
         font-size: 1.2rem;
         opacity: 0.8;
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
       }
 
       .char-row {
         display: flex;
         justify-content: center;
-        gap: 40px;
+        gap: 30px;
         flex-wrap: wrap;
       }
 
       .char-card {
         background-color: var(--card-bg);
         border-radius: 15px;
-        padding: 30px;
+        padding: 20px;
         text-align: center;
         box-shadow: var(--shadow);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         text-decoration: none;
         display: block;
-        width: 250px;
+        width: 220px;
         border: 2px solid transparent;
       }
       .char-card:hover {
@@ -170,15 +168,15 @@
       }
 
       .char-avatar {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
         object-fit: cover;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         border: 4px solid var(--accent-color);
       }
       .char-name {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         font-weight: bold;
         color: var(--text-color);
       }
@@ -186,14 +184,21 @@
       /* --- FOOTER --- */
       footer {
         text-align: center;
-        padding: 2rem; /* Consistent with main page */
+        /* Restored to 2rem to match other pages */
+        padding: 2rem;
         font-size: 0.9rem;
         opacity: 0.7;
         border-top: 1px solid #444;
         background-color: var(--nav-bg);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 0;
       }
       footer p {
-        margin: 10px 0;
+        margin: 0;
       }
     </style>
   </head>
