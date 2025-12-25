@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beryl - Reference</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <style>
+      /* --- CSS VARIABLES --- */
+      :root {
+        --bg-color: #1a1a1a;
+        --card-bg: #2d2d2d;
+        --text-color: #f0f0f0;
+        --accent-color: #9b59b6;
+        --nav-bg: #2d2d2d;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+
+        /* [NEW] CONTROL GALLERY HEIGHT HERE */
+        --gallery-height: 400px;
+      }
+
+      body.light-mode {
+        --bg-color: #f9f9f9;
+        --card-bg: #ffffff;
+        --text-color: #333333;
+        --accent-color: #8e44ad;
+        --nav-bg: #ffffff;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      /* --- HEADER --- */
+      header {
+        background-color: var(--nav-bg);
+        padding: 0.8rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: var(--shadow);
+        box-sizing: border-box;
+
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas:
+          "logo spacer button"
+          "nav spacer button";
+        align-items: center;
+        row-gap: 2px;
+      }
+
+      .logo {
+        grid-area: logo;
+        font-weight: 800;
+        font-size: 1.6rem;
+        color: var(--accent-color);
+        line-height: 1.1;
+        letter-spacing: 1px;
+      }
+
+      nav {
+        grid-area: nav;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 15px;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav a {
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 0.85rem;
+        opacity: 0.7;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover,
+      nav a.active {
+        color: var(--accent-color);
+        opacity: 1;
+      }
+
+      #theme-toggle {
+        grid-area: button;
+        background: transparent;
+        border: 2px solid var(--text-color);
+        color: var(--text-color);
+        padding: 6px 18px;
+        cursor: pointer;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+        align-self: center;
+      }
+      #theme-toggle:hover {
+        background-color: var(--text-color);
+        color: var(--bg-color);
+      }
+
+      /* --- CONTENT --- */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 2rem;
+        flex: 1;
+        box-sizing: border-box;
+      }
+
+      .char-intro {
+        margin-bottom: 3rem;
+      }
+      .char-intro h1 {
+        font-size: 3.5rem;
+        margin: 0;
+        line-height: 1.1;
+      }
+      .char-intro .subtitle {
+        font-size: 1.5rem;
+        opacity: 0.8;
+        display: block;
+        margin-bottom: 1.5rem;
+        color: var(--accent-color);
+      }
+      .char-intro p {
+        font-size: 1.1rem;
+        max-width: 800px;
+        opacity: 0.9;
+      }
+
+      .split-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 4rem;
+        align-items: start;
+      }
+      .stats-card h3 {
+        margin-top: 0;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--accent-color);
+        display: inline-block;
+      }
+      .stats-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .stats-table td {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+      }
+      .stats-label {
+        font-weight: bold;
+        width: 30%;
+        color: var(--accent-color);
+      }
+
+      .profile-card {
+        text-align: center;
+      }
+      .profile-img {
+        width: 100%;
+        max-width: 275px;
+        height: auto;
+        border-radius: 25px;
+        box-shadow: var(--shadow);
+        object-fit: cover;
+      }
+      .img-credit {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        font-style: italic;
+      }
+
+      .ref-section {
+        margin-bottom: 4rem;
+        background-color: var(--card-bg);
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        text-align: center;
+      }
+      .ref-section h3 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: var(--accent-color);
+        font-size: 1.8rem;
+      }
+      .full-ref-image {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+        border-radius: 25px;
+        display: block;
+        margin: 0 auto 15px auto;
+      }
+      .download-btn {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 10px 30px;
+        border-radius: 30px;
+        font-weight: bold;
+        transition: transform 0.2s;
+      }
+      .download-btn:hover {
+        transform: scale(1.05);
+      }
+
+      .details-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+      .palette-container {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+      .color-swatch {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        cursor: pointer;
+        border: 2px solid var(--card-bg);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+      .notes-list li {
+        margin-bottom: 8px;
+        list-style: none;
+      }
+      .check {
+        color: #2ecc71;
+        margin-right: 10px;
+      }
+      .cross {
+        color: #e74c3c;
+        margin-right: 10px;
+      }
+
+      /* --- LORE CARD --- */
+      .lore-card {
+        background-color: var(--card-bg);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        margin-bottom: 2rem;
+      }
+
+      details > summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 5px;
+      }
+
+      details > summary::-webkit-details-marker {
+        display: none;
+      }
+
+      details > summary h3 {
+        margin: 0;
+        color: var(--accent-color);
+        display: inline-block;
+      }
+
+      .toggle-icon {
+        transition: transform 0.3s ease;
+        font-size: 1.2rem;
+        color: var(--accent-color);
+      }
+
+      details[open] .toggle-icon {
+        transform: rotate(180deg);
+      }
+
+      details p {
+        max-width: 750px;
+        margin-top: 1.5rem;
+        animation: fadeIn 0.4s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- ART GALLERY UPDATED --- */
+      .gallery-section {
+        max-width: 800px;
+        margin: 0 auto 4rem auto;
+        text-align: center;
+      }
+
+      .gallery-section h3 {
+        font-size: 1.8rem;
+        color: var(--accent-color);
+        margin-bottom: 1.5rem;
+        display: inline-block;
+        border-bottom: 2px solid var(--accent-color);
+      }
+
+      .gallery-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* Space between images */
+      }
+
+      /* Card Container */
+      .gallery-card {
+        height: auto;
+        flex-grow: 1; /* Allows card to stretch to fill row */
+        flex-basis: auto; /* Start size is determined by content (image) */
+
+        display: flex;
+        flex-direction: column;
+        background-color: var(--nav-bg);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .gallery-card:last-child {
+        flex-grow: 0;
+      }
+
+      .gallery-card:hover {
+        transform: translateY(-5px);
+        z-index: 10;
+      }
+
+      /* Image inside Card */
+      .gallery-card img {
+        height: var(--gallery-height); /* Fixed height from variable */
+        width: auto; /* Width scales naturally */
+        min-width: 100%; /* Ensures image covers the card if flex stretches it */
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Credit Text */
+      .gallery-credit {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+        color: var(--text-color);
+        opacity: 0.8;
+        background-color: rgba(0, 0, 0, 0.2);
+
+        /* Magic fix to prevent text from forcing card wider than image */
+        max-width: 0;
+        min-width: 100%;
+        box-sizing: border-box;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* --- LIGHTBOX (Overlay) --- */
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .lightbox.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .lightbox-content {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        animation: zoomIn 0.3s ease;
+      }
+
+      @keyframes zoomIn {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .close-btn:hover {
+        color: var(--accent-color);
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        opacity: 0.7;
+        margin-top: auto;
+        border-top: 1px solid #444;
+      }
+
+      /* --- MOBILE ADJUSTMENTS --- */
+      @media (max-width: 900px) {
+        /* Update gallery height for mobile */
+        :root {
+          --gallery-height: 100px;
+        }
+
+        .split-layout,
+        .details-row {
+          grid-template-columns: 1fr;
+        }
+        .char-intro h1 {
+          font-size: 2.5rem;
+        }
+        .profile-img {
+          max-width: 100%;
+        }
+        .full-ref-image {
+          max-width: 100%;
+        }
+
+        header {
+          padding: 0.8rem 1rem;
+          grid-template-columns: 1fr auto;
+          grid-template-areas:
+            "logo button"
+            "nav nav";
+          row-gap: 10px;
+        }
+
+        .logo {
+          font-size: 1.4rem;
+        }
+        nav ul {
+          justify-content: center;
+          gap: 12px;
+        }
+        nav a {
+          font-size: 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">ASTRA3USZ</div>
+      <button id="theme-toggle">Light Mode</button>
+      <nav>
+        <ul>
+          <li><a href="../../index.html#about">About</a></li>
+          <li><a href="../../index.html#events">Events</a></li>
+          <li><a href="../../index.html#socials">Socials</a></li>
+          <li><a href="../index.html" class="active">Reference</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container">
+      <div class="char-intro">
+        <h1>Benares Beryl</h1>
+        <span class="subtitle">The Divine Paladin</span>
+        <p>
+          A prince and holy saint of Athenia, Beryl stands as a loyal and
+          formidable ally. Bearing divine armament bestowed by the goddess, he
+          walks the battlefield unyielding, a living testament to faith and
+          steel.
+        </p>
+      </div>
+
+      <div class="split-layout">
+        <div class="stats-card">
+          <h3>Character Bio</h3>
+          <table class="stats-table">
+            <tr>
+              <td class="stats-label">Species</td>
+              <td>Draco Lucis (Dragon)</td>
+            </tr>
+            <tr>
+              <td class="stats-label">Origin</td>
+              <td>Athenia</td>
+            </tr>
+            <tr>
+              <td class="stats-label">Gender</td>
+              <td>Male</td>
+            </tr>
+            <tr>
+              <td class="stats-label">Birthday</td>
+              <td>January 1st</td>
+            </tr>
+            <tr>
+              <td class="stats-label">Height</td>
+              <td>191 cm</td>
+            </tr>
+          </table>
+        </div>
+        <div class="profile-card">
+          <img src="profile.png" alt="Profile" class="profile-img" />
+          <div class="img-credit">Art by Daiji</div>
+        </div>
+      </div>
+
+      <div class="ref-section">
+        <h3>Reference Sheet</h3>
+        <img src="ref.png" alt="Full Reference Sheet" class="full-ref-image" />
+        <div class="img-credit">Reference Sheet by Pudding</div>
+        <a href="ref.png" download class="download-btn">
+          <i class="fas fa-download"></i> Download Full Size
+        </a>
+      </div>
+
+      <div class="details-row">
+        <div>
+          <h3>Color Palette</h3>
+          <p style="font-size: 0.9rem; opacity: 0.7">Click to copy HEX</p>
+          <div class="palette-container">
+            <div
+              class="color-swatch"
+              style="background: #eacbbf"
+              data-color="#eacbbf"
+              onclick="copyColor(this)"
+            ></div>
+            <div
+              class="color-swatch"
+              style="background: #eaebe2"
+              data-color="#eaebe2"
+              onclick="copyColor(this)"
+            ></div>
+            <div
+              class="color-swatch"
+              style="background: #8fb3a7"
+              data-color="#8fb3a7"
+              onclick="copyColor(this)"
+            ></div>
+            <div
+              class="color-swatch"
+              style="background: #dcbf93"
+              data-color="#dcbf93"
+              onclick="copyColor(this)"
+            ></div>
+          </div>
+        </div>
+        <div>
+          <h3>Design Notes</h3>
+          <ul class="notes-list">
+            <li>
+              <i class="fas fa-check check"></i> Beryl is muscular. stripes!
+            </li>
+            <li>
+              <i class="fas fa-check check"></i> His fur runs from his head to
+              his tail.
+            </li>
+            <li>
+              <i class="fas fa-times cross"></i> He is dominant, not submissive.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lore-card">
+        <details>
+          <summary>
+            <h3>
+              <i class="fas fa-book" style="margin-right: 10px"></i>
+              Character Lore
+            </h3>
+            <i class="fas fa-chevron-down toggle-icon"></i>
+          </summary>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Consequuntur mollitia commodi facilis eum quasi quas harum? Quae
+            magni quos at, atque error porro iure facilis doloremque
+            necessitatibus dolorum aperiam officia.
+          </p>
+        </details>
+      </div>
+
+      <div class="gallery-section">
+        <h3>
+          <i class="fas fa-palette" style="margin-right: 10px"></i>Media
+          Showcase
+        </h3>
+        <div class="gallery-grid" id="gallery-container"></div>
+      </div>
+    </div>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+      <span class="close-btn" onclick="closeLightbox(event)">&times;</span>
+      <img class="lightbox-content" id="lightbox-img" />
+    </div>
+
+    <footer>
+      <p>Character & Design © Astra3usZ</p>
+    </footer>
+
+    <script>
+      const toggleButton = document.getElementById("theme-toggle");
+      const body = document.body;
+      toggleButton.addEventListener("click", () => {
+        body.classList.toggle("light-mode");
+        if (body.classList.contains("light-mode")) {
+          toggleButton.textContent = "Dark Mode";
+        } else {
+          toggleButton.textContent = "Light Mode";
+        }
+      });
+      function copyColor(element) {
+        const hex = element.getAttribute("data-color");
+        navigator.clipboard.writeText(hex).then(() => {
+          alert("Copied " + hex + " to clipboard!");
+        });
+      }
+
+      // --- LIGHTBOX JS ---
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+
+      function openLightbox(imgElement) {
+        lightbox.classList.add("active");
+        lightboxImg.src = imgElement.src;
+        document.body.style.overflow = "hidden"; // Prevent scrolling
+      }
+
+      function closeLightbox(event) {
+        if (event.target !== lightboxImg) {
+          lightbox.classList.remove("active");
+          document.body.style.overflow = "auto";
+        }
+      }
+
+      /* --- DYNAMIC GALLERY GENERATOR --- */
+
+      const galleryData = [
+        { src: "marshmallowDaiji.png", credit: "Daiji" },
+        { src: "ภาพวาด154.9.png", credit: "Tora Asaki" },
+      ];
+
+      const galleryContainer = document.getElementById("gallery-container");
+
+      galleryData.forEach((item) => {
+        const card = document.createElement("div");
+        card.className = "gallery-card";
+
+        const img = document.createElement("img");
+        img.src = item.src;
+        img.alt = item.credit;
+        img.onclick = function () {
+          openLightbox(this);
+        };
+
+        const credit = document.createElement("div");
+        credit.className = "gallery-credit";
+        credit.textContent = item.credit;
+
+        card.appendChild(img);
+        card.appendChild(credit);
+        galleryContainer.appendChild(card);
+      });
+    </script>
+  </body>
+</html>
