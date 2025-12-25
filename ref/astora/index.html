@@ -18,6 +18,9 @@
         --accent-color: #9b59b6;
         --nav-bg: #2d2d2d;
         --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+
+        /* [NEW] CONTROL GALLERY HEIGHT HERE */
+        --gallery-height: 100px;
       }
 
       body.light-mode {
@@ -128,7 +131,7 @@
       .container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 2rem 2rem;
+        padding: 1rem 2rem;
         flex: 1;
         box-sizing: border-box;
       }
@@ -269,26 +272,24 @@
         margin-right: 10px;
       }
 
-      /* --- LORE CARD (RENAMED & UPDATED) --- */
+      /* --- LORE CARD --- */
       .lore-card {
         background-color: var(--card-bg);
         padding: 2rem;
         border-radius: 20px;
         box-shadow: var(--shadow);
+        margin-bottom: 3rem;
       }
 
-      /* Styles for the Foldable Interaction */
       details > summary {
-        list-style: none; /* Hides default triangle */
+        list-style: none;
         cursor: pointer;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        /* Padding makes it easier to click */
         padding-bottom: 5px;
       }
 
-      /* Hides default marker in Safari/Chrome */
       details > summary::-webkit-details-marker {
         display: none;
       }
@@ -299,24 +300,19 @@
         display: inline-block;
       }
 
-      /* Arrow Icon Styling */
       .toggle-icon {
         transition: transform 0.3s ease;
         font-size: 1.2rem;
         color: var(--accent-color);
       }
 
-      /* Rotate arrow when open */
       details[open] .toggle-icon {
         transform: rotate(180deg);
       }
 
-      /* Content Styling */
       details p {
-        /* Matches intro max-width exactly */
         max-width: 750px;
         margin-top: 1.5rem;
-        /* Simple fade-in animation */
         animation: fadeIn 0.4s ease-in-out;
       }
 
@@ -331,6 +327,132 @@
         }
       }
 
+      /* --- ART GALLERY UPDATED --- */
+      .gallery-section {
+        max-width: 800px;
+        margin: 0 auto 4rem auto;
+        text-align: center;
+      }
+
+      .gallery-section h3 {
+        font-size: 1.8rem;
+        color: var(--accent-color);
+        margin-bottom: 1.5rem;
+        display: inline-block;
+        border-bottom: 2px solid var(--accent-color);
+      }
+
+      .gallery-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* Space between images */
+      }
+
+      /* Card Container */
+      .gallery-card {
+        height: auto;
+        flex-grow: 1; /* Allows card to stretch to fill row */
+        flex-basis: auto; /* Start size is determined by content (image) */
+
+        display: flex;
+        flex-direction: column;
+        background-color: var(--nav-bg);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .gallery-card:last-child {
+        flex-grow: 0;
+      }
+
+      .gallery-card:hover {
+        transform: translateY(-5px);
+        z-index: 10;
+      }
+
+      /* Image inside Card */
+      .gallery-card img {
+        height: var(--gallery-height); /* Fixed height from variable */
+        width: auto; /* Width scales naturally */
+        min-width: 100%; /* Ensures image covers the card if flex stretches it */
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Credit Text */
+      .gallery-credit {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+        color: var(--text-color);
+        opacity: 0.8;
+        background-color: rgba(0, 0, 0, 0.2);
+
+        /* Magic fix to prevent text from forcing card wider than image */
+        max-width: 0;
+        min-width: 100%;
+        box-sizing: border-box;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* --- LIGHTBOX (Overlay) --- */
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .lightbox.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .lightbox-content {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        animation: zoomIn 0.3s ease;
+      }
+
+      @keyframes zoomIn {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .close-btn:hover {
+        color: var(--accent-color);
+      }
+
       /* --- FOOTER --- */
       footer {
         text-align: center;
@@ -343,6 +465,11 @@
 
       /* --- MOBILE ADJUSTMENTS --- */
       @media (max-width: 900px) {
+        /* Update gallery height for mobile */
+        :root {
+          --gallery-height: 100px;
+        }
+
         .split-layout,
         .details-row {
           grid-template-columns: 1fr;
@@ -517,6 +644,18 @@
           </p>
         </details>
       </div>
+
+      <div class="gallery-section">
+        <h3>
+          <i class="fas fa-palette" style="margin-right: 10px"></i>Art Gallery
+        </h3>
+        <div class="gallery-grid" id="gallery-container"></div>
+      </div>
+    </div>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+      <span class="close-btn" onclick="closeLightbox(event)">&times;</span>
+      <img class="lightbox-content" id="lightbox-img" />
     </div>
 
     <footer>
@@ -540,6 +679,74 @@
           alert("Copied " + hex + " to clipboard!");
         });
       }
+
+      // --- LIGHTBOX JS ---
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+
+      function openLightbox(imgElement) {
+        lightbox.classList.add("active");
+        lightboxImg.src = imgElement.src;
+        document.body.style.overflow = "hidden"; // Prevent scrolling
+      }
+
+      function closeLightbox(event) {
+        if (event.target !== lightboxImg) {
+          lightbox.classList.remove("active");
+          document.body.style.overflow = "auto";
+        }
+      }
+
+      /* --- DYNAMIC GALLERY GENERATOR --- */
+
+      const galleryData = [
+        { src: "img/03ADCMM_03.png", credit: "Likesakiii" },
+        { src: "img/astoraBooBoo.png", credit: "BooBoo" },
+        { src: "img/astoraPipe.png", credit: "FloppySquared" },
+        { src: "img/cicadaBLOCK.jpg", credit: "Frost Monodie" },
+        { src: "img/coffeeAddict.jpg", credit: "Kurokawa Shinichi " },
+        { src: "img/duo.png", credit: "Leoneal" },
+        { src: "img/familyPhoto.jpg", credit: "Likesakiii" },
+        { src: "img/fish.jpg", credit: "KuroPenguin" },
+        { src: "img/fragile2.png", credit: "Leoneal" },
+        { src: "img/huggy.png", credit: "Mild Art" },
+        { src: "img/hugPukan.jpg", credit: "Likesakiii" },
+        { src: "img/IMG_164445.png", credit: "Leoneal" },
+        { src: "img/IMG_3221.PNG", credit: "Daiji" },
+        { src: "img/IMG_8919.PNG", credit: "Daiji" },
+        { src: "img/IMG_8945.PNG", credit: "Daiji" },
+        { src: "img/mannequin.png", credit: "Leoneal" },
+        { src: "img/marshmallowDaiji.PNG", credit: "Daiji" },
+        { src: "img/omakaseSosom.png", credit: "SosomYuzu" },
+        { src: "img/patpatSosom.png", credit: "SosomYuzu" },
+        { src: "img/pillowNore.jpg", credit: "NoreTz" },
+        { src: "img/pinkSimp.jpg", credit: "Betsuto" },
+        { src: "img/seriousFox.jpg", credit: "???" },
+        { src: "img/sillyDoodle.jpg", credit: "Likesakiii" },
+        { src: "img/touchHorn.jpg", credit: "Betsuto" },
+      ];
+
+      const galleryContainer = document.getElementById("gallery-container");
+
+      galleryData.forEach((item) => {
+        const card = document.createElement("div");
+        card.className = "gallery-card";
+
+        const img = document.createElement("img");
+        img.src = item.src;
+        img.alt = item.credit;
+        img.onclick = function () {
+          openLightbox(this);
+        };
+
+        const credit = document.createElement("div");
+        credit.className = "gallery-credit";
+        credit.textContent = item.credit;
+
+        card.appendChild(img);
+        card.appendChild(credit);
+        galleryContainer.appendChild(card);
+      });
     </script>
   </body>
 </html>
