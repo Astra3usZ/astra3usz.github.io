@@ -29,9 +29,9 @@
         --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
 
-      /* --- GLOBAL RESET & BOX SIZING (THE FIX) --- */
+      /* --- GLOBAL RESET & BOX SIZING --- */
       * {
-        box-sizing: border-box; /* keeps padding inside width */
+        box-sizing: border-box;
       }
 
       /* --- GLOBAL STYLES --- */
@@ -46,7 +46,6 @@
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-        /* Ensure no horizontal scroll happens */
         overflow-x: hidden;
         width: 100%;
       }
@@ -222,10 +221,8 @@
       .container {
         max-width: 1000px;
         margin: 0 auto;
-        /* Default Padding for Desktop */
         padding: 4rem 2rem;
         flex: 1;
-        /* Width 100% ensures it takes full space, box-sizing keeps it from overflowing */
         width: 100%;
       }
 
@@ -242,7 +239,7 @@
       }
       .hero-text {
         flex: 1;
-        min-width: 300px; /* Prevents text from squishing too small */
+        min-width: 300px;
       }
       .tagline {
         color: var(--accent-color);
@@ -250,10 +247,19 @@
         display: block;
         margin-bottom: 1rem;
       }
+
+      /* --- UPDATED PROFILE PICTURE CSS --- */
       .profile-pic {
-        width: 350px;
-        height: 350px;
-        object-fit: cover;
+        /* Layout & Size */
+        width: 100%; /* Allows shrinking on mobile */
+        max-width: 350px; /* Capped at 350px on PC */
+        aspect-ratio: 1 / 1; /* Forces a square shape automatically */
+
+        /* Image Quality & Positioning */
+        object-fit: cover; /* Zooms to fill without squashing */
+        object-position: center; /* Ensures the center of image is visible */
+
+        /* Styling */
         border-radius: 15px;
         box-shadow: var(--shadow);
       }
@@ -344,9 +350,8 @@
 
       /* --- MOBILE ADJUSTMENTS --- */
       @media (max-width: 768px) {
-        /* Fix Horizontal Overflow on Mobile */
         .container {
-          padding: 2rem 1rem; /* Smaller side padding prevents content squeezing */
+          padding: 2rem 1rem;
         }
 
         header {
@@ -373,18 +378,10 @@
           font-size: 3.5rem;
         }
 
-        /* Stack Hero Section nicely */
         .hero {
           text-align: center;
           justify-content: center;
-          flex-direction: column-reverse; /* Puts image above text on mobile (optional, looks nice) */
-        }
-
-        .profile-pic {
-          width: 100%;
-          max-width: 300px;
-          height: auto;
-          aspect-ratio: 3/4;
+          flex-direction: column-reverse;
         }
       }
     </style>
