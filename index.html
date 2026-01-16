@@ -34,7 +34,6 @@
         box-sizing: border-box;
       }
 
-      /* --- GLOBAL STYLES --- */
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background-color: var(--bg-color);
@@ -59,7 +58,7 @@
         padding: 0;
       }
 
-      /* --- HEADER (Grid Layout) --- */
+      /* --- HEADER --- */
       header {
         background-color: var(--nav-bg);
         backdrop-filter: blur(12px);
@@ -70,7 +69,6 @@
         left: 0;
         z-index: 1000;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-
         display: grid;
         grid-template-columns: auto 1fr auto;
         grid-template-areas:
@@ -88,18 +86,15 @@
         line-height: 1.1;
         letter-spacing: 1px;
       }
-
       nav {
         grid-area: nav;
       }
-
       nav ul {
         display: flex;
         gap: 15px;
         margin: 0;
         padding: 0;
       }
-
       nav a {
         color: var(--text-color);
         font-weight: 600;
@@ -109,7 +104,6 @@
         letter-spacing: 0.5px;
         transition: all 0.3s ease;
       }
-
       nav a:hover {
         color: var(--accent-color);
         opacity: 1;
@@ -144,8 +138,9 @@
         background-repeat: no-repeat;
         display: flex;
         align-items: center;
-        justify-content: center;
-        text-align: center;
+        justify-content: flex-start;
+        text-align: left;
+        padding-left: 10%;
       }
 
       .banner::before {
@@ -157,9 +152,9 @@
         height: 100%;
         background: linear-gradient(
           to bottom,
-          rgba(0, 0, 0, 0.3) 0%,
-          rgba(0, 0, 0, 0.2) 60%,
-          rgba(var(--bg-color), 1) 100%
+          rgba(0, 0, 0, 0.2) 0%,
+          rgba(0, 0, 0, 0) 50%,
+          var(--bg-color) 100%
         );
         pointer-events: none;
       }
@@ -172,18 +167,18 @@
         font-weight: bold;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         padding-top: 60px;
       }
 
       .banner-content h1 {
-        font-size: 5rem;
+        font-size: 5.2rem;
         margin: 0;
         line-height: 1.1;
         font-weight: 800;
       }
       .banner-content p {
-        font-size: 2rem;
+        font-size: 1.8rem;
         margin-top: 10px;
         font-weight: 700;
       }
@@ -204,7 +199,6 @@
         align-items: center;
         gap: 8px;
         animation: float 2s infinite ease-in-out;
-        cursor: default;
       }
 
       @keyframes float {
@@ -217,7 +211,7 @@
         }
       }
 
-      /* --- CONTENT --- */
+      /* --- CONTAINER & SECTIONS --- */
       .container {
         max-width: 1000px;
         margin: 0 auto;
@@ -230,17 +224,22 @@
         scroll-margin-top: 120px;
       }
 
+      /* --- UPDATED HERO SECTION (Gap Fixed) --- */
       .hero {
         display: flex;
         align-items: center;
-        gap: 40px;
+        justify-content: center; /* Centers the whole group */
+        gap: 20px; /* Reduced gap from 40px to 20px */
         margin-bottom: 4rem;
         flex-wrap: wrap;
       }
+
       .hero-text {
-        flex: 1;
+        flex: 0 1 auto; /* Prevents text from stretching unnecessarily */
+        max-width: 550px; /* Limits width so it stays closer to the image */
         min-width: 300px;
       }
+
       .tagline {
         color: var(--accent-color);
         font-weight: bold;
@@ -248,20 +247,13 @@
         margin-bottom: 1rem;
       }
 
-      /* --- UPDATED PROFILE PICTURE CSS --- */
       .profile-pic {
-        /* Layout & Size */
-        width: 100%; /* Allows shrinking on mobile */
-        max-width: 350px; /* Capped at 350px on PC */
-        aspect-ratio: 1 / 1; /* Forces a square shape automatically */
-
-        /* Image Quality & Positioning */
-        object-fit: cover; /* Zooms to fill without squashing */
-        object-position: center; /* Ensures the center of image is visible */
-
-        /* Styling */
+        max-width: 250px;
+        width: auto;
+        height: auto;
         border-radius: 15px;
         box-shadow: var(--shadow);
+        object-fit: contain;
       }
 
       .section-title {
@@ -330,7 +322,6 @@
         transform: translateY(-3px);
       }
 
-      /* --- FOOTER --- */
       footer {
         text-align: center;
         padding: 2rem;
@@ -344,44 +335,30 @@
         gap: 5px;
         margin-top: auto;
       }
-      footer p {
-        margin: 0;
-      }
 
-      /* --- MOBILE ADJUSTMENTS --- */
       @media (max-width: 768px) {
-        .container {
-          padding: 2rem 1rem;
+        .banner {
+          padding-left: 5%;
+          justify-content: center;
+          text-align: center;
         }
-
+        .banner-content {
+          align-items: center;
+        }
         header {
-          padding: 0.8rem 1rem;
           grid-template-columns: 1fr auto;
-          grid-template-areas:
-            "logo button"
-            "nav nav";
+          grid-template-areas: "logo button" "nav nav";
           row-gap: 10px;
         }
-
-        .logo {
-          font-size: 1.4rem;
-        }
-        nav ul {
-          justify-content: center;
-          gap: 12px;
-        }
-        nav a {
-          font-size: 0.75rem;
-        }
-
         .banner-content h1 {
           font-size: 3.5rem;
         }
-
         .hero {
           text-align: center;
-          justify-content: center;
           flex-direction: column-reverse;
+        }
+        .profile-pic {
+          max-width: 100%;
         }
       }
     </style>
@@ -482,7 +459,7 @@
     </div>
 
     <footer>
-      <p>Art by Likesakiii & wusuzz</p>
+      <p>Art by wusuzz & Leoneal</p>
       <p>© 2026 Made with ❤</p>
     </footer>
 
@@ -491,11 +468,9 @@
       const body = document.body;
       toggleButton.addEventListener("click", () => {
         body.classList.toggle("light-mode");
-        if (body.classList.contains("light-mode")) {
-          toggleButton.textContent = "Dark Mode";
-        } else {
-          toggleButton.textContent = "Light Mode";
-        }
+        toggleButton.textContent = body.classList.contains("light-mode")
+          ? "Dark Mode"
+          : "Light Mode";
       });
     </script>
   </body>
