@@ -18,8 +18,6 @@
         --accent-color: #9b59b6;
         --nav-bg: #2d2d2d;
         --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-
-        /* [NEW] CONTROL GALLERY HEIGHT HERE */
         --gallery-height: 125px;
       }
 
@@ -65,7 +63,6 @@
         z-index: 1000;
         box-shadow: var(--shadow);
         box-sizing: border-box;
-
         display: grid;
         grid-template-columns: auto 1fr auto;
         grid-template-areas:
@@ -79,7 +76,7 @@
         grid-area: logo;
         font-weight: 800;
         font-size: 1.6rem;
-        color: var(--accent-color);
+        color: var(--text-color);
         line-height: 1.1;
         letter-spacing: 1px;
       }
@@ -274,7 +271,6 @@
         margin-right: 10px;
       }
 
-      /* --- LORE CARD --- */
       .lore-card {
         background-color: var(--card-bg);
         padding: 2rem;
@@ -329,7 +325,6 @@
         }
       }
 
-      /* --- ART GALLERY UPDATED --- */
       .gallery-section {
         max-width: 800px;
         margin: 0 auto 4rem auto;
@@ -347,15 +342,13 @@
       .gallery-grid {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px; /* Space between images */
+        gap: 10px;
       }
 
-      /* Card Container */
       .gallery-card {
         height: auto;
-        flex-grow: 1; /* Allows card to stretch to fill row */
-        flex-basis: auto; /* Start size is determined by content (image) */
-
+        flex-grow: 1;
+        flex-basis: auto;
         display: flex;
         flex-direction: column;
         background-color: var(--nav-bg);
@@ -375,24 +368,20 @@
         z-index: 10;
       }
 
-      /* Image inside Card */
       .gallery-card img {
-        height: var(--gallery-height); /* Fixed height from variable */
-        width: auto; /* Width scales naturally */
-        min-width: 100%; /* Ensures image covers the card if flex stretches it */
+        height: var(--gallery-height);
+        width: auto;
+        min-width: 100%;
         object-fit: cover;
         display: block;
       }
 
-      /* Credit Text */
       .gallery-credit {
         padding: 8px 10px;
         font-size: 0.85rem;
         color: var(--text-color);
         opacity: 0.8;
         background-color: rgba(0, 0, 0, 0.2);
-
-        /* Magic fix to prevent text from forcing card wider than image */
         max-width: 0;
         min-width: 100%;
         box-sizing: border-box;
@@ -401,7 +390,6 @@
         text-overflow: ellipsis;
       }
 
-      /* --- LIGHTBOX (Overlay) --- */
       .lightbox {
         display: none;
         position: fixed;
@@ -455,23 +443,28 @@
         color: var(--accent-color);
       }
 
-      /* --- FOOTER --- */
+      /* --- FOOTER (Fixed Padding to match Header heft) --- */
       footer {
         text-align: center;
-        padding: 2rem;
+        padding: 1.2rem 2rem;
         font-size: 0.9rem;
         opacity: 0.7;
         margin-top: auto;
         border-top: 1px solid #444;
+        background-color: var(--nav-bg);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      footer p {
+        margin: 0;
       }
 
-      /* --- MOBILE ADJUSTMENTS --- */
       @media (max-width: 900px) {
-        /* Update gallery height for mobile */
         :root {
           --gallery-height: 100px;
         }
-
         .split-layout,
         .details-row {
           grid-template-columns: 1fr;
@@ -485,7 +478,6 @@
         .full-ref-image {
           max-width: 100%;
         }
-
         header {
           padding: 0.8rem 1rem;
           grid-template-columns: 1fr auto;
@@ -494,7 +486,6 @@
             "nav nav";
           row-gap: 10px;
         }
-
         .logo {
           font-size: 1.4rem;
         }
@@ -510,7 +501,7 @@
   </head>
   <body>
     <header>
-      <div class="logo">ASTRA3USZ</div>
+      <div class="logo">ASTRA | アストラ</div>
       <button id="theme-toggle">Light Mode</button>
       <nav>
         <ul>
@@ -669,11 +660,9 @@
       const body = document.body;
       toggleButton.addEventListener("click", () => {
         body.classList.toggle("light-mode");
-        if (body.classList.contains("light-mode")) {
-          toggleButton.textContent = "Dark Mode";
-        } else {
-          toggleButton.textContent = "Light Mode";
-        }
+        toggleButton.textContent = body.classList.contains("light-mode")
+          ? "Dark Mode"
+          : "Light Mode";
       });
       function copyColor(element) {
         const hex = element.getAttribute("data-color");
@@ -682,14 +671,13 @@
         });
       }
 
-      // --- LIGHTBOX JS ---
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img");
 
       function openLightbox(imgElement) {
         lightbox.classList.add("active");
         lightboxImg.src = imgElement.src;
-        document.body.style.overflow = "hidden"; // Prevent scrolling
+        document.body.style.overflow = "hidden";
       }
 
       function closeLightbox(event) {
@@ -698,8 +686,6 @@
           document.body.style.overflow = "auto";
         }
       }
-
-      /* --- DYNAMIC GALLERY GENERATOR --- */
 
       const galleryData = [
         { src: "img/03ADCMM_03.png", credit: "Likesakiii" },

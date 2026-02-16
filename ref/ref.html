@@ -16,7 +16,6 @@
         --card-bg: #2d2d2d;
         --text-color: #f0f0f0;
         --accent-color: #9b59b6;
-        /* Solid Background for Sub-pages */
         --nav-bg: #2d2d2d;
         --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
       }
@@ -30,7 +29,6 @@
         --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
 
-      /* SAFETY: Force cutoff for any horizontal overflow */
       * {
         box-sizing: border-box;
       }
@@ -44,7 +42,6 @@
         padding: 0;
       }
 
-      /* --- GLOBAL STYLES --- */
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background-color: var(--bg-color);
@@ -53,11 +50,7 @@
           background-color 0.3s ease,
           color 0.3s ease;
         line-height: 1.6;
-
-        /* THE FIX: Use min-height instead of height */
         min-height: 100vh;
-        /* Removed overflow: hidden so mobile can scroll */
-
         display: flex;
         flex-direction: column;
       }
@@ -71,16 +64,15 @@
         padding: 0;
       }
 
-      /* --- HEADER (Grid Layout) --- */
+      /* --- HEADER (Updated) --- */
       header {
         background-color: var(--nav-bg);
         padding: 0.8rem 2rem;
-        position: sticky; /* Sticky is fine here */
+        position: sticky;
         top: 0;
         z-index: 1000;
         box-shadow: var(--shadow);
         box-sizing: border-box;
-
         display: grid;
         grid-template-columns: auto 1fr auto;
         grid-template-areas:
@@ -94,7 +86,7 @@
         grid-area: logo;
         font-weight: 800;
         font-size: 1.6rem;
-        color: var(--accent-color);
+        color: var(--text-color);
         line-height: 1.1;
         letter-spacing: 1px;
       }
@@ -209,10 +201,10 @@
         color: var(--text-color);
       }
 
-      /* --- FOOTER --- */
+      /* --- FOOTER (Updated to match Header size) --- */
       footer {
         text-align: center;
-        padding: 2rem;
+        padding: 0.8rem 2rem;
         font-size: 0.9rem;
         opacity: 0.7;
         border-top: 1px solid #444;
@@ -221,8 +213,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 5px;
-        /* Ensure footer doesn't stick weirdly if page is short */
         margin-top: auto;
       }
       footer p {
@@ -251,7 +241,6 @@
           font-size: 0.75rem;
         }
 
-        /* Ensure container has breathing room on mobile */
         .container {
           padding: 2rem 1rem;
         }
@@ -260,7 +249,7 @@
   </head>
   <body>
     <header>
-      <div class="logo">ASTRA3USZ</div>
+      <div class="logo">ASTRA | アストラ</div>
       <button id="theme-toggle">Light Mode</button>
       <nav>
         <ul>
@@ -304,11 +293,9 @@
       const body = document.body;
       toggleButton.addEventListener("click", () => {
         body.classList.toggle("light-mode");
-        if (body.classList.contains("light-mode")) {
-          toggleButton.textContent = "Dark Mode";
-        } else {
-          toggleButton.textContent = "Light Mode";
-        }
+        toggleButton.textContent = body.classList.contains("light-mode")
+          ? "Dark Mode"
+          : "Light Mode";
       });
     </script>
   </body>
