@@ -81,6 +81,7 @@
         row-gap: 2px;
       }
 
+      /* [UPDATED] Logo text match */
       .logo {
         grid-area: logo;
         font-weight: 800;
@@ -327,6 +328,7 @@
       }
 
       /* --- FOOTER --- */
+      /* [UPDATED] Size and heft match header */
       footer {
         text-align: center;
         padding: 1.2rem 2rem;
@@ -492,13 +494,37 @@
     </footer>
 
     <script>
-      const toggleButton = document.getElementById("theme-toggle");
+      /* --- [UPDATED] HIERARCHY PERSISTENT THEME LOGIC --- */
       const body = document.body;
+      const toggleButton = document.getElementById("theme-toggle");
+      const currentTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+      // Function to apply theme
+      const setTheme = (theme) => {
+        if (theme === "light") {
+          body.classList.add("light-mode");
+          toggleButton.textContent = "Dark Mode";
+        } else {
+          body.classList.remove("light-mode");
+          toggleButton.textContent = "Light Mode";
+        }
+      };
+
+      // Initial Theme Check (Hierarchy: LocalStorage -> System -> Default)
+      if (currentTheme) {
+        setTheme(currentTheme);
+      } else if (!prefersDark.matches) {
+        // If no preference and system is NOT dark, default to Light
+        setTheme("light");
+      }
+
+      // Event listener for toggle
       toggleButton.addEventListener("click", () => {
-        body.classList.toggle("light-mode");
-        toggleButton.textContent = body.classList.contains("light-mode")
-          ? "Dark Mode"
-          : "Light Mode";
+        const isLight = body.classList.toggle("light-mode");
+        const theme = isLight ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+        toggleButton.textContent = isLight ? "Dark Mode" : "Light Mode";
       });
     </script>
   </body>
