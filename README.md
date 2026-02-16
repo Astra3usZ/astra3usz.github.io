@@ -1,6 +1,6 @@
 # astra3usz.github.io
 
-A personal portfolio website designed to showcase my work and provide a brief introduction about me.
+Built with GitHub Pages, this site is my personal corner of the internet where I share my projects, my journey, and a bit about who I am with the world.
 
 ---
 
