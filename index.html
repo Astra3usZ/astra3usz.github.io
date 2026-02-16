@@ -174,16 +174,12 @@
         padding-top: 60px;
       }
 
-      .banner-content h1 {
-        font-size: 5.2rem;
-        margin: 0;
-        line-height: 1.1;
-        font-weight: 800;
-      }
-      .banner-content p {
-        font-size: 1.8rem;
-        margin-top: 10px;
-        font-weight: 700;
+      .banner-logo {
+        max-width: 500px;
+        width: 90%;
+        height: auto;
+        margin-bottom: 10px;
+        filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
       }
 
       .scroll-hint {
@@ -227,7 +223,7 @@
         scroll-margin-top: 120px;
       }
 
-      /* --- UPDATED ABOUT SECTION --- */
+      /* --- ABOUT SECTION --- */
       .about {
         display: flex;
         align-items: center;
@@ -325,7 +321,7 @@
         transform: translateY(-3px);
       }
 
-      /* --- UPDATED FOOTER --- */
+      /* --- FOOTER --- */
       footer {
         text-align: center;
         padding: 0.8rem 2rem;
@@ -357,8 +353,8 @@
           grid-template-areas: "logo button" "nav nav";
           row-gap: 10px;
         }
-        .banner-content h1 {
-          font-size: 3.5rem;
+        .banner-logo {
+          max-width: 300px;
         }
         .about {
           text-align: center;
@@ -372,7 +368,7 @@
   </head>
   <body>
     <header>
-      <div class="logo">ASTRA3USZ</div>
+      <div class="logo">ASTRA | アストラ</div>
       <button id="theme-toggle">Light Mode</button>
       <nav>
         <ul>
@@ -386,8 +382,7 @@
 
     <div class="banner">
       <div class="banner-content">
-        <h1>Astra</h1>
-        <p>แอสตร้า | アストラ</p>
+        <img src="img/logo.png" alt="Astra3usZ Logo" class="banner-logo" />
         <div class="scroll-hint">
           Scroll down to see more <i class="fas fa-chevron-down"></i>
         </div>
